@@ -1,8 +1,4 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
-import codecs
-import csv
-import json
-
 import psycopg2
 
 conn = psycopg2.connect(
