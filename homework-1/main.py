@@ -1,4 +1,7 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
+import csv
+from pprint import pprint
+
 import psycopg2
 
 conn = psycopg2.connect(
@@ -19,6 +22,7 @@ try:
                 file1.close()
             with open('north_data\employees.txt', 'r') as file_final:
                 cur.copy_from(file_final, 'employees', sep=',')
+            open('north_data\employees.txt','w').close()
             with open('north_data\customers_data.csv', 'r') as file_csv:
                 next(file_csv)  # пропускаем заголовок
                 for line in file_csv:
@@ -28,6 +32,7 @@ try:
                 file1.close()
             with open('north_data\customers.txt', 'r') as file_final:
                 cur.copy_from(file_final, 'customers', sep=',')
+            open('north_data\customers.txt', 'w').close()
             with open('north_data\orders_data.csv', 'r') as file_csv:
                 next(file_csv)  # пропускаем заголовок
                 for line in file_csv:
@@ -37,5 +42,6 @@ try:
                 file1.close()
             with open('north_data\orders.txt', 'r') as file_final:
                 cur.copy_from(file_final, 'orders', sep=',')
+            open('north_data\orders.txt', 'w').close()
 finally:
     conn.close()
